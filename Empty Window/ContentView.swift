@@ -8,31 +8,35 @@
 import SwiftUI
 import AVFoundation
 
-func toggleTorch(on: Bool){
-    guard let device = AVCaptureDevice.default(for: .video) else {return}
-    if device.hasTorch{
-        do{
-            try device.lockForConfiguration()
-            if on == true{
-                device.torchMode = .on
-            }
-            else{
-                device.torchMode = .off
-            }
-        }
-        catch{
-            print("torch could not be found")
-        }
-    }
-    else{
-        print("torch is not available")
-    }
-}
+
 
 struct ContentView: View {
+    
+    @State var userInput: String = ""
+    
     var body: some View {
-        Text("Hello, world!")
+        
+        VStack{
+            
+            CircleImage()
+                .padding(.top, 80)
+                .padding(.bottom, 200)
+            VStack {
+
+                MyButton(userInput: $userInput)
+
+                Divider()
+                TextField("Please Enter: ", text: $userInput)
+                    .font(.title3)
+                    .frame(width: 300, height: 80, alignment: .center)
+                Divider()
+
+            }
             .padding()
+            
+            Spacer()
+        }
+        .background(Color.white      )
     }
 }
 
