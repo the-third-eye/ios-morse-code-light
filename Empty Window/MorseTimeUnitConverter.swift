@@ -52,7 +52,7 @@ struct MorseTimeUnitConverter{
         "9": [3, 3, 3, 3, 1]
     ]
     
-    func convert(text: String)-> [[[Int]]] {
+    func convert(text: String)-> TextUnits {
         let words = text.lowercased().split(separator: " ")
         var textUnits: TextUnits = []
         for word in words{
