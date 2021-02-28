@@ -11,7 +11,7 @@ import AVFoundation
 class MorseTorch{
     
     private var textUnits: [[[Int]]]
-    private let unitSecs = 0.2
+    private let unitSecs: Float = 0.2
     
     init(text: String) {
         let converter = MorseTimeUnitConverter()
@@ -19,13 +19,14 @@ class MorseTorch{
         print(textUnits)
     }
     
-    func toggleTorch(on: Bool){
+    func toggleTorch(on: Bool, torchLevel: Float){
         guard let device = AVCaptureDevice.default(for: .video) else {return}
         if device.hasTorch{
             do{
                 try device.lockForConfiguration()
                 if on == true{
                     device.torchMode = .on
+                    try device.setTorchModeOn(level: torchLevel)
                 }
                 else{
                     device.torchMode = .off
@@ -40,23 +41,23 @@ class MorseTorch{
         }
     }
     
-    func activate(){
+    func activate(torchLevel: Float, speed: Float = 1.0){
         DispatchQueue.global(qos: .background).async {
-            self.activateHelper()
+            self.activateHelper(torchLevel: torchLevel, speed: speed)
         }
     }
     
     
-    @objc func activateHelper(){
-        let wordSpacer = unitSecs*6
-        let letterSpacer = unitSecs*3
-        let subLetterSpacer = unitSecs
+    private func activateHelper(torchLevel: Float, speed: Float){
+        let wordSpacer = unitSecs*6/speed
+        let letterSpacer = unitSecs*3/speed
+        let subLetterSpacer = unitSecs/speed
         for wordUnits in textUnits{
             for letterUnits in wordUnits{
                 for letterUnit in letterUnits{
-                    toggleTorch(on: true)
+                    toggleTorch(on: true, torchLevel: torchLevel)
                     Thread.sleep(forTimeInterval: Double(letterUnit))
-                    toggleTorch(on: false)
+                    toggleTorch(on: false, torchLevel: torchLevel)
                     Thread.sleep(forTimeInterval: Double(subLetterSpacer))
                 }
                 Thread.sleep(forTimeInterval: Double(letterSpacer))

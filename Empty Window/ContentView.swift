@@ -27,8 +27,11 @@ struct ContentView: View {
 
                 Divider()
                 TextField("Please Enter: ", text: $userInput)
-                    .font(.title3)
-                    .frame(width: 300, height: 80, alignment: .center)
+                   .textFieldStyle(RoundedBorderTextFieldStyle())
+//                    .background(Color.white)
+                    .font(.title2)
+//                    .frame(width: 300, height: 80, alignment: .center)
+//                    .cornerRadius(20)
                 Divider()
 
             }
@@ -36,7 +39,7 @@ struct ContentView: View {
             
             Spacer()
         }
-        .background(Color.white      )
+        .background(Color.white)
     }
 }
 

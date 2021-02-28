@@ -17,7 +17,7 @@ struct MyButton: View {
         
         Button(action: {
             let morseTorch = MorseTorch(text: userInput)
-            morseTorch.activate()
+            morseTorch.activate(torchLevel: 1.0, speed: 5.0)
         }){
             HStack{
                 Image("morse-code-3")
