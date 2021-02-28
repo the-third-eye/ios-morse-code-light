@@ -7,9 +7,13 @@
 
 import Foundation
 
+typealias LetterUnits = [Int]
+typealias WordUnits = [LetterUnits]
+typealias TextUnits = [WordUnits]
+
 struct MorseTimeUnitConverter{
     
-    private var alphabetMap : [Character: [Int]] = [
+    private var alphabetMap : [Character: LetterUnits] = [
         "a": [1, 3],
         "b": [3, 1, 1, 1],
         "c": [3, 1, 3, 1],
@@ -50,9 +54,9 @@ struct MorseTimeUnitConverter{
     
     func convert(text: String)-> [[[Int]]] {
         let words = text.lowercased().split(separator: " ")
-        var textUnits: [[[Int]]] = []
+        var textUnits: TextUnits = []
         for word in words{
-            var wordUnits: [[Int]] = []
+            var wordUnits: WordUnits = []
             for letter in word{
                 guard let units = alphabetMap[letter] else {continue}
                 wordUnits.append(units)

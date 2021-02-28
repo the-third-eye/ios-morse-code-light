@@ -10,7 +10,7 @@ import AVFoundation
 
 class MorseTorch{
     
-    private var textUnits: [[[Int]]]
+    private var textUnits: TextUnits
     private let unitSecs: Float = 0.2
     
     init(text: String) {
