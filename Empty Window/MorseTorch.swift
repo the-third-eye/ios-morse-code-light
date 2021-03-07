@@ -1,23 +1,23 @@
 //
-//  MorseTorch.swift
+//  MorseTorch2.swift
 //  Empty Window
 //
-//  Created by Carlos McNulty on 2/26/21.
+//  Created by Carlos McNulty on 3/7/21.
 //
 
 import Foundation
+
 import AVFoundation
 
-class MorseTorch{
+struct MorseTorch{
     
-    private var textUnits: TextUnits
+    private let text: MorseText
     private let unitSecs: Float = 0.2
     
-    init(text: String) {
-        let converter = MorseTimeUnitConverter()
-        textUnits = converter.convert(text: text)
-        print(textUnits)
+    init(text: MorseText) {
+        self.text = text
     }
+    
     
     func toggleTorch(on: Bool, torchLevel: Float){
         guard let device = AVCaptureDevice.default(for: .video) else {return}
@@ -49,14 +49,19 @@ class MorseTorch{
     
     
     private func activateHelper(torchLevel: Float, speed: Float){
+        // Time between each word
         let wordSpacer = unitSecs*6/speed
+        // Time betwen letters
         let letterSpacer = unitSecs*3/speed
+        // Time between morse code units in letter
         let subLetterSpacer = unitSecs/speed
-        for wordUnits in textUnits{
-            for letterUnits in wordUnits{
-                for letterUnit in letterUnits{
+        
+        for word in text.getWords(){
+            for character in word.getCharacters(){
+                for unit in character.getUnits(){
+                    // Toggle torch on for length of morse code unit
                     toggleTorch(on: true, torchLevel: torchLevel)
-                    Thread.sleep(forTimeInterval: Double(letterUnit))
+                    Thread.sleep(forTimeInterval: Double(unit))
                     toggleTorch(on: false, torchLevel: torchLevel)
                     Thread.sleep(forTimeInterval: Double(subLetterSpacer))
                 }

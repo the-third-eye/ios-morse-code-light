@@ -1,38 +1,36 @@
 //
-//  MorseConverter.swift
+//  MorseLetter.swift
 //  Empty Window
 //
-//  Created by Carlos McNulty on 2/26/21.
+//  Created by Carlos McNulty on 3/7/21.
 //
 
 import Foundation
 
-typealias LetterUnits = [Int]
-typealias WordUnits = [LetterUnits]
-typealias TextUnits = [WordUnits]
+typealias MorseUnits = [Int]
 
-struct MorseTimeUnitConverter{
+struct MorseCharacter{
     
-    private var alphabetMap : [Character: LetterUnits] = [
+    private static let alphabetMap : [Character: MorseUnits] = [
         "a": [1, 3],
         "b": [3, 1, 1, 1],
         "c": [3, 1, 3, 1],
         "d": [3, 1, 1],
         "e": [1],
-        "f": [1,1, 3, 1],
+        "f": [1, 1, 3, 1],
         "g": [3, 3, 1],
-        "h": [1,1,1,1],
-        "i": [1,1],
+        "h": [1, 1, 1, 1],
+        "i": [1, 1],
         "j": [1, 3, 3, 3],
         "k": [3, 1, 3],
         "l": [1, 3, 1, 1],
         "m": [3, 3],
         "n": [3, 1],
-        "o": [3,3,3],
+        "o": [3, 3, 3],
         "p": [1, 3, 3, 1],
         "q": [3, 3, 1, 3],
         "r": [1, 3, 1],
-        "s": [1,1,1],
+        "s": [1, 1, 1],
         "t": [3],
         "u": [1, 1, 3],
         "v": [3, 3, 3, 1],
@@ -52,17 +50,23 @@ struct MorseTimeUnitConverter{
         "9": [3, 3, 3, 3, 1]
     ]
     
-    func convert(text: String)-> TextUnits {
-        let words = text.lowercased().split(separator: " ")
-        var textUnits: TextUnits = []
-        for word in words{
-            var wordUnits: WordUnits = []
-            for letter in word{
-                guard let units = alphabetMap[letter] else {continue}
-                wordUnits.append(units)
-            }
-            textUnits.append(wordUnits)
-        }
-        return textUnits
+    private var character: Character
+    private var units: MorseUnits
+    
+    static func isMorseChar(character: Character) -> Bool{
+        return alphabetMap.keys.contains(character)
+    }
+    
+    init(character: Character) {
+        self.character = character
+        self.units = MorseCharacter.alphabetMap[character] ?? []
+    }
+    
+    func getChar() -> Character{
+        return character
+    }
+    
+    func getUnits() -> MorseUnits{
+        return units
     }
 }

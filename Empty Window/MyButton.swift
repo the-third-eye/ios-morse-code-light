@@ -16,8 +16,31 @@ struct MyButton: View {
     var body: some View {
         
         Button(action: {
-            let morseTorch = MorseTorch(text: userInput)
+            let morseTorch = MorseTorch(text: MorseText(text: userInput))
             morseTorch.activate(torchLevel: 1.0, speed: 5.0)
+            
+//            let morseText = MorseText(text: "hello / my . name . is *** carlos ")
+//            var words = morseText.getWords()
+//            words[0].addCharacter(character: MorseCharacter(character: "t"))
+//
+//            print("first word")
+//            print("starting")
+//
+//            for character in words[0].getCharacters(){
+//                print(character.getChar())
+//            }
+//
+//            print("ending")
+//
+//            for word in words{
+//                var actualWord = ""
+//                for character in word.getCharacters(){
+//                    actualWord.append(character.getChar())
+//                }
+//                print(actualWord)
+//                actualWord = ""
+//            }
+            
         }){
             HStack{
                 Image("morse-code-3")

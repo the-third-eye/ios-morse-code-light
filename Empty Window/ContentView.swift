@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         
         VStack{
-            
+
             CircleImage()
                 .padding(.top, 80)
                 .padding(.bottom, 200)
@@ -36,7 +36,7 @@ struct ContentView: View {
 
             }
             .padding()
-            
+
             Spacer()
         }
         .background(Color.white)

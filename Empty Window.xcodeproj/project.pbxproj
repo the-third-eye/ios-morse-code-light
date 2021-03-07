@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF456A4625F47A9D00BA28DD /* MorseSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A4525F47A9D00BA28DD /* MorseSound.swift */; };
+		BF456A4925F4E57800BA28DD /* MorseCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A4825F4E57800BA28DD /* MorseCharacter.swift */; };
+		BF456A4C25F4E67F00BA28DD /* MorseWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A4B25F4E67F00BA28DD /* MorseWord.swift */; };
+		BF456A4F25F4E68F00BA28DD /* MorseText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A4E25F4E68F00BA28DD /* MorseText.swift */; };
+		BF456A5225F4E90700BA28DD /* MorseUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A5125F4E90700BA28DD /* MorseUtility.swift */; };
+		BF456A5625F54D6B00BA28DD /* MorseTorch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A5525F54D6B00BA28DD /* MorseTorch.swift */; };
 		BF9E31A925E5EACC00073695 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF9E31A825E5EACC00073695 /* AVFoundation.framework */; };
 		BF9E31B025E9714300073695 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9E31AF25E9714300073695 /* CircleImage.swift */; };
 		BF9E31BE25E9E88000073695 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9E31BD25E9E88000073695 /* MyButton.swift */; };
-		BF9E31C825E9F7AD00073695 /* MorseTimeUnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9E31C425E9ECCC00073695 /* MorseTimeUnitConverter.swift */; };
-		BF9E31CB25E9FAC500073695 /* MorseTorch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9E31CA25E9FAC500073695 /* MorseTorch.swift */; };
 		BFA0B76025E4ADB900C601A3 /* Empty_WindowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0B75F25E4ADB900C601A3 /* Empty_WindowApp.swift */; };
 		BFA0B76225E4ADB900C601A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0B76125E4ADB900C601A3 /* ContentView.swift */; };
 		BFA0B76425E4ADBB00C601A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFA0B76325E4ADBB00C601A3 /* Assets.xcassets */; };
@@ -19,11 +23,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF456A4525F47A9D00BA28DD /* MorseSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseSound.swift; sourceTree = "<group>"; };
+		BF456A4825F4E57800BA28DD /* MorseCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCharacter.swift; sourceTree = "<group>"; };
+		BF456A4B25F4E67F00BA28DD /* MorseWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseWord.swift; sourceTree = "<group>"; };
+		BF456A4E25F4E68F00BA28DD /* MorseText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseText.swift; sourceTree = "<group>"; };
+		BF456A5125F4E90700BA28DD /* MorseUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseUtility.swift; sourceTree = "<group>"; };
+		BF456A5525F54D6B00BA28DD /* MorseTorch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseTorch.swift; sourceTree = "<group>"; };
 		BF9E31A825E5EACC00073695 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BF9E31AF25E9714300073695 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		BF9E31BD25E9E88000073695 /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
-		BF9E31C425E9ECCC00073695 /* MorseTimeUnitConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseTimeUnitConverter.swift; sourceTree = "<group>"; };
-		BF9E31CA25E9FAC500073695 /* MorseTorch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseTorch.swift; sourceTree = "<group>"; };
 		BFA0B75C25E4ADB900C601A3 /* Empty Window.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Empty Window.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA0B75F25E4ADB900C601A3 /* Empty_WindowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty_WindowApp.swift; sourceTree = "<group>"; };
 		BFA0B76125E4ADB900C601A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -74,13 +82,17 @@
 			children = (
 				BFA0B75F25E4ADB900C601A3 /* Empty_WindowApp.swift */,
 				BFA0B76125E4ADB900C601A3 /* ContentView.swift */,
-				BF9E31C425E9ECCC00073695 /* MorseTimeUnitConverter.swift */,
-				BF9E31CA25E9FAC500073695 /* MorseTorch.swift */,
 				BF9E31BD25E9E88000073695 /* MyButton.swift */,
 				BF9E31AF25E9714300073695 /* CircleImage.swift */,
 				BFA0B76325E4ADBB00C601A3 /* Assets.xcassets */,
 				BFA0B76825E4ADBB00C601A3 /* Info.plist */,
 				BFA0B76525E4ADBB00C601A3 /* Preview Content */,
+				BF456A4525F47A9D00BA28DD /* MorseSound.swift */,
+				BF456A4825F4E57800BA28DD /* MorseCharacter.swift */,
+				BF456A4B25F4E67F00BA28DD /* MorseWord.swift */,
+				BF456A4E25F4E68F00BA28DD /* MorseText.swift */,
+				BF456A5125F4E90700BA28DD /* MorseUtility.swift */,
+				BF456A5525F54D6B00BA28DD /* MorseTorch.swift */,
 			);
 			path = "Empty Window";
 			sourceTree = "<group>";
@@ -163,11 +175,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFA0B76225E4ADB900C601A3 /* ContentView.swift in Sources */,
-				BF9E31CB25E9FAC500073695 /* MorseTorch.swift in Sources */,
-				BF9E31C825E9F7AD00073695 /* MorseTimeUnitConverter.swift in Sources */,
+				BF456A4925F4E57800BA28DD /* MorseCharacter.swift in Sources */,
+				BF456A4F25F4E68F00BA28DD /* MorseText.swift in Sources */,
+				BF456A5625F54D6B00BA28DD /* MorseTorch.swift in Sources */,
 				BF9E31BE25E9E88000073695 /* MyButton.swift in Sources */,
+				BF456A4C25F4E67F00BA28DD /* MorseWord.swift in Sources */,
 				BFA0B76025E4ADB900C601A3 /* Empty_WindowApp.swift in Sources */,
 				BF9E31B025E9714300073695 /* CircleImage.swift in Sources */,
+				BF456A4625F47A9D00BA28DD /* MorseSound.swift in Sources */,
+				BF456A5225F4E90700BA28DD /* MorseUtility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
