@@ -19,6 +19,16 @@ struct MorseWord{
         }
     }
     
+    init(characters: MorseCharacter...){
+        for character in characters{
+            self.characters.append(character)
+        }
+    }
+    
+    init(characters: [MorseCharacter]){
+        self.characters = characters
+    }
+    
     mutating func addCharacter(character: MorseCharacter){
         characters.append(character)
     }

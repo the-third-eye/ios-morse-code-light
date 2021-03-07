@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF456A4625F47A9D00BA28DD /* MorseSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A4525F47A9D00BA28DD /* MorseSound.swift */; };
 		BF456A4925F4E57800BA28DD /* MorseCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A4825F4E57800BA28DD /* MorseCharacter.swift */; };
 		BF456A4C25F4E67F00BA28DD /* MorseWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A4B25F4E67F00BA28DD /* MorseWord.swift */; };
 		BF456A4F25F4E68F00BA28DD /* MorseText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A4E25F4E68F00BA28DD /* MorseText.swift */; };
@@ -23,7 +22,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BF456A4525F47A9D00BA28DD /* MorseSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseSound.swift; sourceTree = "<group>"; };
 		BF456A4825F4E57800BA28DD /* MorseCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCharacter.swift; sourceTree = "<group>"; };
 		BF456A4B25F4E67F00BA28DD /* MorseWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseWord.swift; sourceTree = "<group>"; };
 		BF456A4E25F4E68F00BA28DD /* MorseText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseText.swift; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 				BFA0B76325E4ADBB00C601A3 /* Assets.xcassets */,
 				BFA0B76825E4ADBB00C601A3 /* Info.plist */,
 				BFA0B76525E4ADBB00C601A3 /* Preview Content */,
-				BF456A4525F47A9D00BA28DD /* MorseSound.swift */,
 				BF456A4825F4E57800BA28DD /* MorseCharacter.swift */,
 				BF456A4B25F4E67F00BA28DD /* MorseWord.swift */,
 				BF456A4E25F4E68F00BA28DD /* MorseText.swift */,
@@ -182,7 +179,6 @@
 				BF456A4C25F4E67F00BA28DD /* MorseWord.swift in Sources */,
 				BFA0B76025E4ADB900C601A3 /* Empty_WindowApp.swift in Sources */,
 				BF9E31B025E9714300073695 /* CircleImage.swift in Sources */,
-				BF456A4625F47A9D00BA28DD /* MorseSound.swift in Sources */,
 				BF456A5225F4E90700BA28DD /* MorseUtility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
