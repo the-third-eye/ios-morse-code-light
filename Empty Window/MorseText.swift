@@ -14,11 +14,11 @@ struct MorseText{
     init(){}
     
     init(text: String) {
-        let tokens =
+        let words =
             MorseUtility.cleanInput(text: text).split(separator: " ")
         
-        for token in tokens{
-            words.append(MorseWord(word: String(token)))
+        for word in words{
+            self.words.append(MorseWord(word: String(word)))
         }
     }
     
