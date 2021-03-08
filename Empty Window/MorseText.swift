@@ -40,6 +40,16 @@ struct MorseText{
         return words
     }
     
+    func getCharacters() -> [MorseCharacter] {
+        var characters: [MorseCharacter] = []
+        for word in words{
+            for character in word.getCharacters(){
+                characters.append(character)
+            }
+        }
+        return characters
+    }
+    
     func getLength() -> Int{
         return words.count
     }
