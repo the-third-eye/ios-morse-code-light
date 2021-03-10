@@ -13,6 +13,9 @@
 		BF456A5225F4E90700BA28DD /* MorseUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A5125F4E90700BA28DD /* MorseUtility.swift */; };
 		BF456A5625F54D6B00BA28DD /* MorseTorch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A5525F54D6B00BA28DD /* MorseTorch.swift */; };
 		BF456A6625F5BAFD00BA28DD /* MorseCodeGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A6525F5BAFD00BA28DD /* MorseCodeGridView.swift */; };
+		BF456A6A25F705AC00BA28DD /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF456A6925F705AC00BA28DD /* TextView.swift */; };
+		BF9126E025F930F200B9F402 /* AmericanMorseStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9126DF25F930F200B9F402 /* AmericanMorseStandard.swift */; };
+		BF9126E925F9325600B9F402 /* MorseStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9126E825F9325600B9F402 /* MorseStandard.swift */; };
 		BF9E31A925E5EACC00073695 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF9E31A825E5EACC00073695 /* AVFoundation.framework */; };
 		BF9E31B025E9714300073695 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9E31AF25E9714300073695 /* CircleImage.swift */; };
 		BF9E31BE25E9E88000073695 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9E31BD25E9E88000073695 /* MyButton.swift */; };
@@ -29,6 +32,9 @@
 		BF456A5125F4E90700BA28DD /* MorseUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseUtility.swift; sourceTree = "<group>"; };
 		BF456A5525F54D6B00BA28DD /* MorseTorch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseTorch.swift; sourceTree = "<group>"; };
 		BF456A6525F5BAFD00BA28DD /* MorseCodeGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeGridView.swift; sourceTree = "<group>"; };
+		BF456A6925F705AC00BA28DD /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		BF9126DF25F930F200B9F402 /* AmericanMorseStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmericanMorseStandard.swift; sourceTree = "<group>"; };
+		BF9126E825F9325600B9F402 /* MorseStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseStandard.swift; sourceTree = "<group>"; };
 		BF9E31A825E5EACC00073695 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BF9E31AF25E9714300073695 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		BF9E31BD25E9E88000073695 /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
@@ -93,6 +99,9 @@
 				BF456A5525F54D6B00BA28DD /* MorseTorch.swift */,
 				BF456A6525F5BAFD00BA28DD /* MorseCodeGridView.swift */,
 				BFA0B76525E4ADBB00C601A3 /* Preview Content */,
+				BF456A6925F705AC00BA28DD /* TextView.swift */,
+				BF9126DF25F930F200B9F402 /* AmericanMorseStandard.swift */,
+				BF9126E825F9325600B9F402 /* MorseStandard.swift */,
 			);
 			path = "Empty Window";
 			sourceTree = "<group>";
@@ -175,6 +184,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFA0B76225E4ADB900C601A3 /* ContentView.swift in Sources */,
+				BF456A6A25F705AC00BA28DD /* TextView.swift in Sources */,
+				BF9126E925F9325600B9F402 /* MorseStandard.swift in Sources */,
 				BF456A4925F4E57800BA28DD /* MorseCharacter.swift in Sources */,
 				BF456A4F25F4E68F00BA28DD /* MorseText.swift in Sources */,
 				BF456A5625F54D6B00BA28DD /* MorseTorch.swift in Sources */,
@@ -182,6 +193,7 @@
 				BF9E31BE25E9E88000073695 /* MyButton.swift in Sources */,
 				BF456A4C25F4E67F00BA28DD /* MorseWord.swift in Sources */,
 				BFA0B76025E4ADB900C601A3 /* Empty_WindowApp.swift in Sources */,
+				BF9126E025F930F200B9F402 /* AmericanMorseStandard.swift in Sources */,
 				BF9E31B025E9714300073695 /* CircleImage.swift in Sources */,
 				BF456A5225F4E90700BA28DD /* MorseUtility.swift in Sources */,
 			);

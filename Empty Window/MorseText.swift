@@ -53,6 +53,10 @@ struct MorseText{
     func getLength() -> Int{
         return words.count
     }
+    
+    func toString() -> String{
+        return words.map{ $0.toString() }.joined(separator: "/")
+    }
 }
 
 /* ***** PSEUDO CODE SECTIONS THAT MIGHT BE USEFUL FOR UI ***** */

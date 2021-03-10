@@ -18,15 +18,17 @@ struct MorseCodeGridView: View {
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
         GridItem(.flexible())
     ]
     
     var body: some View {
         ScrollView{
-            LazyVGrid(columns: columns, spacing: 20){
-//                ForEach(data, id: \.self){item in
-//                    Text(userInput)
-//                }
+            LazyVGrid(columns: columns, spacing: 10){
                 ForEach(data, id: \.self){ (text) in
                     let morseText = MorseText(text: userInput)
                     let count = morseText.getLength()

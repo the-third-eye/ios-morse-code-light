@@ -40,4 +40,8 @@ struct MorseWord{
     func getLength() -> Int{
         return characters.count
     }
+    
+    func toString() -> String{
+        return characters.map{ $0.toString() }.joined(separator: " ")
+    }
 }
