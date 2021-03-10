@@ -12,7 +12,7 @@ typealias MorseUnits = [Int]
 struct MorseCharacter{
     
     private var character: Character
-    private static var standard: MorseStandard = AmericanMorseStandard()
+    private static var standard: MorseStandard = InternationalMorseStandard()
     
     static func isMorseChar(character: Character) -> Bool{
         return standard.isCharacter(character: character)
