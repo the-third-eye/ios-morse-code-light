@@ -1,11 +1,11 @@
 //
 //  InternationalMorseStandard.swift
-//  Empty Window
 //
 //  Created by Carlos McNulty on 3/10/21.
 //
 
 import Foundation
+import SwiftUI
 
 struct InternationalMorseStandard: MorseStandard{
     
@@ -48,44 +48,77 @@ struct InternationalMorseStandard: MorseStandard{
         "9": "----."
     ]
     
-    private static let unitsMap : [Character: MorseUnits] = [
-        "a": [1, 3],
-        "b": [3, 1, 1, 1],
-        "c": [3, 1, 3, 1],
-        "d": [3, 1, 1],
-        "e": [1],
-        "f": [1, 1, 3, 1],
-        "g": [3, 3, 1],
-        "h": [1, 1, 1, 1],
-        "i": [1, 1],
-        "j": [1, 3, 3, 3],
-        "k": [3, 1, 3],
-        "l": [1, 3, 1, 1],
-        "m": [3, 3],
-        "n": [3, 1],
-        "o": [3, 3, 3],
-        "p": [1, 3, 3, 1],
-        "q": [3, 3, 1, 3],
-        "r": [1, 3, 1],
-        "s": [1, 1, 1],
-        "t": [3],
-        "u": [1, 1, 3],
-        "v": [3, 3, 3, 1],
-        "w": [1, 3, 3],
-        "x": [3, 1, 1, 3],
-        "y": [3, 1, 3, 3],
-        "z": [3, 3, 1, 1],
-        "0": [3, 3, 3, 3, 3],
-        "1": [1, 3, 3, 3, 3],
-        "2": [1, 1, 3, 3, 3],
-        "3": [1, 1, 1, 3, 3],
-        "4": [1, 1, 1, 1, 3],
-        "5": [1, 1, 1, 1, 1],
-        "6": [3, 1, 1, 1, 1],
-        "7": [3, 3, 1, 1, 1],
-        "8": [3, 3, 3, 1, 1],
-        "9": [3, 3, 3, 3, 1]
+    private static let imageMap: [Character: Image] = [
+        "a": Image("international-morse-images/a"),
+        "b": Image("international-morse-images/b"),
+        "c": Image("international-morse-images/c"),
+        "d": Image("international-morse-images/d"),
+        "e": Image("international-morse-images/e"),
+        "f": Image("international-morse-images/f"),
+        "g": Image("international-morse-images/g"),
+        "h": Image("international-morse-images/h"),
+        "i": Image("international-morse-images/i"),
+        "j": Image("international-morse-images/j"),
+        "k": Image("international-morse-images/k"),
+        "l": Image("international-morse-images/l"),
+        "m": Image("international-morse-images/m"),
+        "n": Image("international-morse-images/n"),
+        "o": Image("international-morse-images/o"),
+        "p": Image("international-morse-images/p"),
+        "q": Image("international-morse-images/q"),
+        "r": Image("international-morse-images/r"),
+        "s": Image("international-morse-images/s"),
+        "t": Image("international-morse-images/t"),
+        "u": Image("international-morse-images/u"),
+        "v": Image("international-morse-images/v"),
+        "w": Image("international-morse-images/w"),
+        "x": Image("international-morse-images/x"),
+        "y": Image("international-morse-images/y"),
+        "z": Image("international-morse-images/z"),
     ]
+        
+    private static let unitsMap : [Character: MorseUnits] = [
+        "a": [Token(.SYM, 1), Token(.SYM, 3)],
+        "b": [Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1)],
+        "c": [Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 1)],
+        "d": [Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 1)],
+        "e": [Token(.SYM, 1)],
+        "f": [Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 1)],
+        "g": [Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 1)],
+        "h": [Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1)],
+        "i": [Token(.SYM, 1), Token(.SYM, 1)],
+        "j": [Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3)],
+        "k": [Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 3)],
+        "l": [Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 1)],
+        "m": [Token(.SYM, 3), Token(.SYM, 3)],
+        "n": [Token(.SYM, 3), Token(.SYM, 1)],
+        "o": [Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3)],
+        "p": [Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 1)],
+        "q": [Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 3)],
+        "r": [Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 1)],
+        "s": [Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1)],
+        "t": [Token(.SYM, 3)],
+        "u": [Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 3)],
+        "v": [Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 1)],
+        "w": [Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 3)],
+        "x": [Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 3)],
+        "y": [Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 3)],
+        "z": [Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 1)],
+        "0": [Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3)],
+        "1": [Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3)],
+        "2": [Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3)],
+        "3": [Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 3), Token(.SYM, 3)],
+        "4": [Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 3)],
+        "5": [Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1)],
+        "6": [Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1)],
+        "7": [Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 1), Token(.SYM, 1)],
+        "8": [Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 1), Token(.SYM, 1)],
+        "9": [Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 3), Token(.SYM, 1)]
+    ]
+    
+    func getImage(character: Character) -> Image{
+        return InternationalMorseStandard.imageMap[character] ?? Image("intl-morse-a")
+    }
     
     func getSymbol(character: Character) -> String{
         return InternationalMorseStandard

@@ -8,40 +8,38 @@
 import SwiftUI
 
 struct MorseCodeGridView: View {
-    
-    let data = (1...1000).map{ "Item \($0)" }
-    
+        
     @Binding var userInput: String
-    
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
+    @Binding var selectedStandard: StandardType
     
     var body: some View {
+        let columns: [GridItem] =
+            Array(repeating: .init(.flexible()), count: 5)
+        let characters = MorseText(text: userInput, standardType: selectedStandard).getCharacters()
+        let count = max(1, characters.count)
         ScrollView{
-            LazyVGrid(columns: columns, spacing: 10){
-                ForEach(data, id: \.self){ (text) in
-                    let morseText = MorseText(text: userInput)
-                    let count = morseText.getLength()
-                    Text(String(count))
+            LazyVGrid(columns: columns, spacing: 5){
+                ForEach(0..<count, id: \.self){ index in
+                    if characters.count == 0{
+                        MorseImageView()
+                            .padding(.bottom)
+                    }
+                    else{
+                        characters[index].getImage()
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 55, height: 5, alignment: .center)
+                            .padding([.bottom, .trailing])
+                    }
                 }
             }
             .padding(.horizontal)
-        }
+        }.padding()
     }
 }
 
 struct MorseCodeGridView_Previews: PreviewProvider {
     static var previews: some View {
-        MorseCodeGridView(userInput: .constant("hello"))
+        MorseCodeGridView(userInput: .constant("abcdefghijklmnopqrstuvwxyz"), selectedStandard: .constant(.InternationalMorse))
     }
 }

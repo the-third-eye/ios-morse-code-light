@@ -50,24 +50,31 @@ struct MorseTorch{
     
     private func activateHelper(torchLevel: Float, speed: Float){
         // Time between each word
-        let wordSpacer = unitSecs*6/speed
+        let wordSpacer = Double(unitSecs*6/speed)
         // Time betwen letters
-        let letterSpacer = unitSecs*3/speed
+        let letterSpacer = Double(unitSecs*3/speed)
         // Time between morse code units in letter
-        let subLetterSpacer = unitSecs/speed
+        let subLetterSpacer = Double(unitSecs/speed)
         
         for word in text.getWords(){
             for character in word.getCharacters(){
                 for unit in character.getUnits(){
-                    // Toggle torch on for length of morse code unit
-                    toggleTorch(on: true, torchLevel: torchLevel)
-                    Thread.sleep(forTimeInterval: Double(unit))
-                    toggleTorch(on: false, torchLevel: torchLevel)
-                    Thread.sleep(forTimeInterval: Double(subLetterSpacer))
+                    if unit.getType() == .SPACE {
+                        // Torch is off for space length
+                        Thread.sleep(forTimeInterval:
+                                        Double(unit.getLength())*subLetterSpacer)
+                    }
+                    else if unit.getType() == .SYM{
+                        // Toggle torch on for length of morse code unit
+                        toggleTorch(on: true, torchLevel: torchLevel)
+                        Thread.sleep(forTimeInterval: Double(unit.getLength())*subLetterSpacer)
+                        toggleTorch(on: false, torchLevel: torchLevel)
+                        Thread.sleep(forTimeInterval: subLetterSpacer)
+                    }
                 }
-                Thread.sleep(forTimeInterval: Double(letterSpacer))
+                Thread.sleep(forTimeInterval: letterSpacer)
             }
-            Thread.sleep(forTimeInterval: Double(wordSpacer))
+            Thread.sleep(forTimeInterval: wordSpacer)
         }
     }
 }

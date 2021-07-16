@@ -1,25 +1,24 @@
 //
 //  MorseLetter.swift
-//  Empty Window
 //
 //  Created by Carlos McNulty on 3/7/21.
 //
 
-import Foundation
-
-typealias MorseUnits = [Int]
+import Foundation 
+import SwiftUI
 
 struct MorseCharacter{
     
     private var character: Character
-    private static var standard: MorseStandard = InternationalMorseStandard()
+    private var standard: MorseStandard
     
-    static func isMorseChar(character: Character) -> Bool{
-        return standard.isCharacter(character: character)
+    init(character: Character, standard: MorseStandard) {
+        self.character = character
+        self.standard = standard
     }
     
-    init(character: Character) {
-        self.character = character
+    func getImage() -> Image{
+        return standard.getImage(character: character)
     }
     
     func getChar() -> Character{
@@ -27,20 +26,14 @@ struct MorseCharacter{
     }
     
     func getUnits() -> MorseUnits{
-        return MorseCharacter
-            .standard.getUnits(character: character)
+        return standard.getUnits(character: character)
     }
     
-    static func getStandard() -> MorseStandard{
+    func getStandard() -> MorseStandard{
         return standard
     }
     
-    static func setStandard(standard: MorseStandard){
-        MorseCharacter.standard = standard
-    }
-    
     func toString() -> String{
-        return MorseCharacter
-            .standard.getSymbol(character: character)
+        return standard.getSymbol(character: character)
     }
 }
