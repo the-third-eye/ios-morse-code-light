@@ -13,12 +13,11 @@ struct MorseCodeGridView: View {
     @Binding var selectedStandard: StandardType
     
     var body: some View {
-        let columns: [GridItem] =
-            Array(repeating: .init(.flexible()), count: 5)
+        let columns: [GridItem] = [GridItem(.adaptive(minimum: 53), spacing: 10)]
         let characters = MorseText(text: userInput, standardType: selectedStandard).getCharacters()
         let count = max(1, characters.count)
         ScrollView{
-            LazyVGrid(columns: columns, spacing: 5){
+            LazyVGrid(columns: columns, alignment: .leading, spacing: 5){
                 ForEach(0..<count, id: \.self){ index in
                     if characters.count == 0{
                         MorseImageView()
@@ -26,20 +25,19 @@ struct MorseCodeGridView: View {
                     }
                     else{
                         characters[index].getImage()
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 55, height: 5, alignment: .center)
-                            .padding([.bottom, .trailing])
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            //.frame(width: 55, height: 5, alignment: .leading)
+//                            .padding([.bottom, .trailing])
                     }
                 }
             }
-            .padding(.horizontal)
-        }.padding()
+        }
     }
 }
 
 struct MorseCodeGridView_Previews: PreviewProvider {
     static var previews: some View {
-        MorseCodeGridView(userInput: .constant("abcdefghijklmnopqrstuvwxyz"), selectedStandard: .constant(.InternationalMorse))
+        MorseCodeGridView(userInput: .constant("yzyzyzyzyaaaaaayyaaaaaa"), selectedStandard: .constant(.InternationalMorse))
     }
 }

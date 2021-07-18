@@ -12,10 +12,11 @@ struct MorseImageView: View {
     
     var body: some View{
         Image("international-morse-images/a")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 53, height: 5, alignment: .leading)
-            .padding([.bottom, .trailing])
+            .padding()
+//            .resizable()
+//            .aspectRatio(contentMode: .fit)
+//            .frame(width: 53, height: 5, alignment: .leading)
+//            .padding([.bottom, .trailing])
     }
 }
 
