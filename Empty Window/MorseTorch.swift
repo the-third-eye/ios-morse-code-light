@@ -13,13 +13,14 @@ struct MorseTorch{
     
     private let text: MorseText
     private let unitSecs: Float = 0.2
+    private var running = false
     
     init(text: MorseText) {
         self.text = text
     }
     
     
-    func toggleTorch(on: Bool, torchLevel: Float){
+    private static func toggleTorch(on: Bool, torchLevel: Float){
         guard let device = AVCaptureDevice.default(for: .video) else {return}
         if device.hasTorch{
             do{
@@ -47,6 +48,34 @@ struct MorseTorch{
         }
     }
     
+    static func playCharacter(character: MorseCharacter, brightness: Float = 1.0, speed: Float = 1.0){
+        DispatchQueue.global(qos: .background).async {
+            self.playCharacterHelper(character: character, brightness: brightness, speed: speed)
+        }
+    }
+    
+    static private func playCharacterHelper(character: MorseCharacter, brightness: Float = 1.0, speed: Float = 1.0){
+        
+        let unitSecs: Float = 0.2
+            
+        // Time between morse code units in letter
+        let subLetterSpacer = Double(unitSecs/speed)
+        
+        for unit in character.getUnits(){
+            if unit.getType() == .SPACE {
+                // Torch is off for space length
+                Thread.sleep(forTimeInterval:
+                                Double(unit.getLength())*subLetterSpacer)
+            }
+            else if unit.getType() == .SYM{
+                // Toggle torch on for length of morse code unit
+                toggleTorch(on: true, torchLevel: brightness)
+                Thread.sleep(forTimeInterval: Double(unit.getLength())*subLetterSpacer)
+                toggleTorch(on: false, torchLevel: brightness)
+                Thread.sleep(forTimeInterval: subLetterSpacer)
+            }
+        }
+    }
     
     private func activateHelper(torchLevel: Float, speed: Float){
         // Time between each word
@@ -66,9 +95,9 @@ struct MorseTorch{
                     }
                     else if unit.getType() == .SYM{
                         // Toggle torch on for length of morse code unit
-                        toggleTorch(on: true, torchLevel: torchLevel)
+                        MorseTorch.toggleTorch(on: true, torchLevel: torchLevel)
                         Thread.sleep(forTimeInterval: Double(unit.getLength())*subLetterSpacer)
-                        toggleTorch(on: false, torchLevel: torchLevel)
+                        MorseTorch.toggleTorch(on: false, torchLevel: torchLevel)
                         Thread.sleep(forTimeInterval: subLetterSpacer)
                     }
                 }

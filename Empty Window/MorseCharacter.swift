@@ -18,7 +18,11 @@ struct MorseCharacter{
     }
     
     func getImage() -> Image{
-        return standard.getImage(character: character)
+        return standard.getImage(character: character, scalar: 0.5)
+    }
+    
+    func getSymbolWidth() -> Float{
+        return standard.getSymbolWidth(character: character)
     }
     
     func getChar() -> Character{

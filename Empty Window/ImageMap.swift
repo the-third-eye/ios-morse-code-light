@@ -9,5 +9,7 @@ import Foundation
 import SwiftUI
 
 protocol ImageMap {
-    func getImage(character: Character) -> Image
+    func getImage(character: Character, scalar: Float) -> Image
+    func getSymbol(symbol: String) -> Image
+    func getSymbolWidth(character: Character) -> Float
 }

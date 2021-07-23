@@ -9,53 +9,61 @@ import Foundation
 import SwiftUI
 
 struct NavView: View{
+    
+    @State var test: String = "help"
+    @State var selectedStandard: MorseStandard = InternationalMorseStandard()
+    
     var body: some View{
-        TextEditor(text: .constant("Placeholder"))
-//        NavigationView{
-//            VStack{
-//                Image("logo-vector")
-//                    .frame(maxWidth: .infinity, minHeight: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                NavigationLink(destination: MorseInputView()
-//                                .navigationBarBackButtonHidden(true)
-//                                .navigationBarTitle("")
-//                                .navigationBarHidden(true)
-//                ) {
-//                    Text("Convert To Morse").font(.system(size: 12))
-//                        .foregroundColor(.black).padding()
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 6)
-//                            .stroke(Color.black, lineWidth: 1)
-//                    )
-//                    .navigationBarTitle("")
-//                    .navigationBarHidden(true)
-//                }
-//                .navigationTitle("Navigation")
-//                NavigationLink(
-//                    destination: Text("Under Construction")){
-//                    Text("Convert From Morse").font(.system(size: 12))
-//                        .foregroundColor(.black).padding()
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 6)
-//                            .stroke(Color.black, lineWidth: 1)
-//                    )
-//                }
-//                NavigationLink(
-//                    destination: Text("Under Construction")){
-//                    Text("Learn Morse").font(.system(size: 12))
-//                        .foregroundColor(.black).padding()
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 6)
-//                            .stroke(Color.black, lineWidth: 1)
-//                    )
-//
-//                }
-//                Image("logo-vector")
-//                    .frame(maxWidth: .infinity, minHeight: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//            }
-//
-//
-//
-//        }
+        NavigationView{
+            VStack{
+                Image("logo-vector")
+                    .frame(maxWidth: .infinity, minHeight: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                NavigationLink(destination: MorseInputView(input: "")
+                ) {
+                    Text("Convert To Morse").font(.system(size: 12))
+                        .foregroundColor(.black).padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .stroke(Color.black, lineWidth: 1)
+                    )
+                    .navigationBarTitle("")
+                    .navigationBarHidden(true)
+                }
+                .navigationTitle("Navigation")
+                NavigationLink(
+                    destination: InternationalSymbolMenuView()){
+                    Text("Convert From Morse").font(.system(size: 12))
+                        .foregroundColor(.black).padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .stroke(Color.black, lineWidth: 1)
+                    )
+                }
+                NavigationLink(
+                    destination: LearnAmericanMorseView()){
+                    Text("Learn American Morse").font(.system(size: 12))
+                        .foregroundColor(.black).padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .stroke(Color.black, lineWidth: 1)
+                    )
+
+                }
+                NavigationLink(
+                    destination: LearnInternationalMorseView()){
+                    Text("Learn International Morse").font(.system(size: 12))
+                        .foregroundColor(.black).padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .stroke(Color.black, lineWidth: 1)
+                    )
+
+                }
+                Image("logo-vector")
+                    .frame(maxWidth: .infinity, minHeight: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            }
+        }
+        .accentColor(.black)
     }
 }
 

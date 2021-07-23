@@ -9,11 +9,16 @@ import Foundation
 import SwiftUI
 
 struct MorseSoundSettingsView: View{
+    
+    @Environment(\.presentationMode) var presentation
+    
     @Binding var speed: Double
     @Binding var volume: Double
     
     var body: some View{
         VStack{
+            Text("Sound Settings")
+                .padding(.bottom, 25)
             HStack{
                 Text("Speed")
                     .frame(width: 60, alignment: .leading)
@@ -28,7 +33,9 @@ struct MorseSoundSettingsView: View{
             }
             HStack{
                 Spacer()
-                Button(action: {}){
+                Button(action: {
+                    self.presentation.wrappedValue.dismiss()
+                }){
                     Text("Play").font(.system(size: 11))
                         .foregroundColor(.black)
                         .padding(.init(top: 2, leading: 15, bottom: 2, trailing: 15))
@@ -38,6 +45,9 @@ struct MorseSoundSettingsView: View{
                         .stroke(Color.black, lineWidth: 1)
                 )
             }
+            Image("logo-vector")
+                .frame(maxWidth: .infinity, minHeight: 200)
+            Spacer()
         }.padding()
     }
 }

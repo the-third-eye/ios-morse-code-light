@@ -9,11 +9,18 @@ import Foundation
 import SwiftUI
 
 struct MorseLightSettingsView: View{
+    
+    @Environment(\.presentationMode) var presentation
+    
     @Binding var speed: Double
     @Binding var brightness: Double
+    @Binding var userInput: String
+    @Binding var selectedStandard: StandardType
     
     var body: some View{
         VStack{
+            Text("Light Settings")
+                .padding(.bottom, 25)
             HStack{
                 Text("Speed")
                     .frame(width: 60, alignment: .leading)
@@ -28,7 +35,12 @@ struct MorseLightSettingsView: View{
             }
             HStack{
                 Spacer()
-                Button(action: {}){
+                Button(action: {
+                    self.presentation.wrappedValue.dismiss()
+                    let torch = MorseTorch(text: MorseText(text: userInput, standardType: selectedStandard))
+                    torch.activate(torchLevel: 1.0)
+                    
+                }){
                     Text("Play").font(.system(size: 11))
                         .foregroundColor(.black)
                         .padding(.init(top: 2, leading: 15, bottom: 2, trailing: 15))
@@ -38,12 +50,15 @@ struct MorseLightSettingsView: View{
                         .stroke(Color.black, lineWidth: 1)
                 )
             }
+            Image("logo-vector")
+                .frame(maxWidth: .infinity, minHeight: 200)
+            Spacer()
         }.padding()
     }
 }
 
 struct MorseLightSettings_Previews: PreviewProvider{
     static var previews: some View{
-        MorseLightSettingsView(speed: .constant(1.0), brightness: .constant(1.0))
+        MorseLightSettingsView(speed: .constant(1.0), brightness: .constant(1.0), userInput: .constant("hello"), selectedStandard: .constant(.AmericanMorse))
     }
 }
