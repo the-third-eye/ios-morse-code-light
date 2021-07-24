@@ -10,15 +10,10 @@ import Foundation
 import AVFoundation
 
 struct MorseTorch{
-    
-    private let text: MorseText
-    private let unitSecs: Float = 0.2
-    private var running = false
-    
-    init(text: MorseText) {
-        self.text = text
-    }
-    
+        
+    static private let UNIT_SECS: Float     = 0.2
+    static private let WORD_SPACER: Float   = UNIT_SECS*6.0
+    static private let LETTER_SPACER: Float = UNIT_SECS*3.0
     
     private static func toggleTorch(on: Bool, torchLevel: Float){
         guard let device = AVCaptureDevice.default(for: .video) else {return}
@@ -42,24 +37,22 @@ struct MorseTorch{
         }
     }
     
-    func activate(torchLevel: Float, speed: Float = 1.0){
+    static func playText(text: MorseText, settings: MorseSettings, gridState: MorseGridState){
         DispatchQueue.global(qos: .background).async {
-            self.activateHelper(torchLevel: torchLevel, speed: speed)
+            playTextHelper(text: text, settings: settings, gridState: gridState)
         }
     }
     
-    static func playCharacter(character: MorseCharacter, brightness: Float = 1.0, speed: Float = 1.0){
+    static func playCharacter(character: MorseCharacter, settings: MorseSettings){
         DispatchQueue.global(qos: .background).async {
-            self.playCharacterHelper(character: character, brightness: brightness, speed: speed)
+            playCharacterHelper(character: character, settings: settings)
         }
     }
     
-    static private func playCharacterHelper(character: MorseCharacter, brightness: Float = 1.0, speed: Float = 1.0){
-        
-        let unitSecs: Float = 0.2
-            
+    static private func playCharacterHelper(character: MorseCharacter, settings: MorseSettings){
+                    
         // Time between morse code units in letter
-        let subLetterSpacer = Double(unitSecs/speed)
+        let subLetterSpacer = Double(UNIT_SECS/settings.speed)
         
         for unit in character.getUnits(){
             if unit.getType() == .SPACE {
@@ -69,41 +62,54 @@ struct MorseTorch{
             }
             else if unit.getType() == .SYM{
                 // Toggle torch on for length of morse code unit
-                toggleTorch(on: true, torchLevel: brightness)
+                toggleTorch(on: true, torchLevel: settings.brightness)
                 Thread.sleep(forTimeInterval: Double(unit.getLength())*subLetterSpacer)
-                toggleTorch(on: false, torchLevel: brightness)
+                toggleTorch(on: false, torchLevel: settings.brightness)
                 Thread.sleep(forTimeInterval: subLetterSpacer)
             }
         }
     }
     
-    private func activateHelper(torchLevel: Float, speed: Float){
-        // Time between each word
-        let wordSpacer = Double(unitSecs*6/speed)
-        // Time betwen letters
-        let letterSpacer = Double(unitSecs*3/speed)
-        // Time between morse code units in letter
-        let subLetterSpacer = Double(unitSecs/speed)
+    static private func playTextHelper(text: MorseText, settings: MorseSettings, gridState: MorseGridState){
         
-        for word in text.getWords(){
-            for character in word.getCharacters(){
-                for unit in character.getUnits(){
-                    if unit.getType() == .SPACE {
-                        // Torch is off for space length
-                        Thread.sleep(forTimeInterval:
-                                        Double(unit.getLength())*subLetterSpacer)
-                    }
-                    else if unit.getType() == .SYM{
-                        // Toggle torch on for length of morse code unit
-                        MorseTorch.toggleTorch(on: true, torchLevel: torchLevel)
-                        Thread.sleep(forTimeInterval: Double(unit.getLength())*subLetterSpacer)
-                        MorseTorch.toggleTorch(on: false, torchLevel: torchLevel)
-                        Thread.sleep(forTimeInterval: subLetterSpacer)
-                    }
+        DispatchQueue.main.sync {
+            gridState.start(text.getCharacters())
+        }
+        
+        // Time between each word
+        let wordSpacer = Double(WORD_SPACER/settings.speed)
+        // Time betwen letters
+        let letterSpacer = Double(LETTER_SPACER/settings.speed)
+        
+        var pos = 0
+        let words = text.getWords()
+        
+        for i in 0..<words.count{
+            let characters = words[i].getCharacters()
+            for j in 0..<characters.count{
+                
+                DispatchQueue.main.sync {
+                    gridState.setOn(pos)
                 }
-                Thread.sleep(forTimeInterval: letterSpacer)
+                playCharacterHelper(character: characters[j], settings: settings)
+                
+                DispatchQueue.main.sync {
+                    gridState.setOff()
+                }
+                // Last character doesn't need spacing at the end, word spacing is used
+                if j < characters.count-1{
+                    Thread.sleep(forTimeInterval: letterSpacer)
+                }
+                pos += 1
             }
-            Thread.sleep(forTimeInterval: wordSpacer)
+            // Last word doesn't need spacing at the end
+            if i < words.count-1{
+                Thread.sleep(forTimeInterval: wordSpacer)
+            }
+        }
+        
+        DispatchQueue.main.sync {
+            gridState.stop()
         }
     }
 }

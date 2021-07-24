@@ -7,78 +7,24 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
+
 
 struct MorseConversionView: View{
     
-    @State private var runningMorse: Bool = false
-    @State private var showCharacter: [Bool] = [false]
+    @StateObject
+    private var gridState: MorseGridState = MorseGridState()
+    
+    @StateObject
+    private var settings: MorseSettings = MorseSettings()
     
     @State private var showLightModal = false
     @State private var showSoundModal = false
-    @State private var showPopover = false
     
     @Binding var userInput: String
-    @State var speed: Double = 10.0
-    @State var intensity: Double = 10.0
-    @State var selectedMorseType: MorseType = .Lights
-    @State var selectedStandard: StandardType = .InternationalMorse
     
     var body: some View{
         VStack{
-            
-//            HStack{
-//
-//                NavigationLink(destination: HomeView()){
-//                    Text("Back").font(.system(size: 12))
-//                        .foregroundColor(.black) 
-//                        .padding(.init(top: 2, leading: 10, bottom: 2, trailing: 10))
-//                        .overlay(
-//                            RoundedRectangle(cornerRadius: 6)
-//                                .stroke(Color.black, lineWidth: 1)
-//                        )
-////                        .navigationBarTitle("")
-////                        .navigationBarHidden(true)
-//                }
-//                NavigationLink(destination: HomeView()){
-//                    Text("Home").font(.system(size: 12))
-//                        .foregroundColor(.black)
-//                        .padding(.init(top: 2, leading: 10, bottom: 2, trailing: 10))
-//                        .overlay(
-//                            RoundedRectangle(cornerRadius: 6)
-//                                .stroke(Color.black, lineWidth: 1)
-//                        )
-////                        .navigationBarTitle("")
-////                        .navigationBarHidden(true)
-//                }
-//                NavigationLink(destination: Text("Under Construction")){
-//                    Text("Share Image").font(.system(size: 12))
-//                        .foregroundColor(.black)
-//                        .padding(.init(top: 2, leading: 10, bottom: 2, trailing: 10))
-//                        .overlay(
-//                            RoundedRectangle(cornerRadius: 6)
-//                                .stroke(Color.black, lineWidth: 1)
-//                        )
-////                        .navigationBarTitle("")
-////                        .navigationBarHidden(true)
-//                }
-//
-//                NavigationLink(destination: Text("Under Construction")){
-//                    Text("Save Image").font(.system(size: 12))
-//                        .foregroundColor(.black)
-//                        .padding(.init(top: 2, leading: 10, bottom: 2, trailing: 10))
-//                        .overlay(
-//                            RoundedRectangle(cornerRadius: 6)
-//                                .stroke(Color.black, lineWidth: 1)
-//                        )
-////                        .navigationBarTitle("")
-////                        .navigationBarHidden(true)
-//                }
-//                Spacer()
-//            }.padding(.leading)
-//            .navigationTitle("")
-//            .navigationBarHidden(true)
-//            .navigationBarBackButtonHidden(true)
-            
             Image("logo-vector")
                 .frame(maxWidth: .infinity, minHeight: 100)
             HStack{
@@ -89,37 +35,32 @@ struct MorseConversionView: View{
                         .foregroundColor(.black)
                         .padding(.init(top: 2, leading: 10, bottom: 2, trailing: 10))
                 }
-                .sheet(isPresented: $showLightModal){
-                    MorseLightSettingsView(speed: $speed, brightness: $intensity, userInput: $userInput, selectedStandard: $selectedStandard)
+                .sheet(isPresented: $showLightModal, onDismiss: {
+                    let text = MorseText(text: userInput, standardType: settings.selectedStandard)
+                    
+                    DispatchQueue.global().async {
+                        MorseTorch.playText(text: text, settings: settings, gridState: gridState)
+                    }
+                }){
+                    MorseLightSettingsView(settings: settings, userInput: $userInput)
                 }
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
                         .stroke(Color.black, lineWidth: 1)
                 )
                 Button(action: {
-                    //self.showSoundModal = true
-                    self.showPopover = true
+                    self.showSoundModal = true
                 }){
                     Text("Convert To Sound").font(.system(size: 14))
                         .foregroundColor(.black)
                         .padding(.init(top: 2, leading: 10, bottom: 2, trailing: 10))
-                }
-//                .sheet(isPresented: $showSoundModal){
-//                    MorseSoundSettingsView(speed: $speed, volume: $intensity)
-//                }
-                .popover(isPresented: $showPopover){
-                    Text("Popover")
-                        .font(.headline)
-                        .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .padding()
                 }
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
                         .stroke(Color.black, lineWidth: 1)
                 )
             }
-            MorseCodeGridView(runningMorse: $runningMorse, showCharacter: $showCharacter,
-                              userInput: $userInput, selectedStandard: $selectedStandard)
+            MorseCodeGridView(gridState: gridState, settings: settings, userInput: $userInput)
                 .frame(maxWidth: .infinity, maxHeight: 400, alignment: .center)
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
@@ -127,8 +68,9 @@ struct MorseConversionView: View{
                 )
                 .padding()
             
-            MorseStandardPicker(selectedStandard: $selectedStandard)
+            MorseStandardPicker(selectedStandard: $settings.selectedStandard)
                 .padding([.leading, .trailing])
+                .disabled(gridState.isRunning())
             Spacer()
         }
         .toolbar{
@@ -152,7 +94,7 @@ struct MorseConversionView: View{
                 }
             }
         }
-    } 
+    }
 }
 
 struct MorseConversionView_Preview: PreviewProvider{

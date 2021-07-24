@@ -17,6 +17,9 @@ struct LearnInternationalMorseView: View{
         return width
     }
     
+    @ObservedObject
+    var settings: MorseSettings
+    
     var body: some View{
         
 
@@ -35,10 +38,8 @@ struct LearnInternationalMorseView: View{
                             .frame(width: CGFloat(getWidth(character: character, scalar: 0.5)), height: 12.5, alignment: .center)
                         Spacer()
                         Button(action:{
-                            
                             let morseChar = MorseCharacter(character: character, standard: InternationalMorseStandard())
-                            MorseTorch.playCharacter(character: morseChar)
-//                            MorseTorch.playCharacter(character: MorseCharacter(character: character, standard: .InternationalMorse))
+                            MorseTorch.playCharacter(character: morseChar, settings: settings)
                         }){
                             Image(systemName: "bolt")
                         }
@@ -55,7 +56,7 @@ struct LearnInternationalMorseView: View{
 
 struct LearnInternationalMorseView_Previews: PreviewProvider{
     static var previews: some View{
-        LearnInternationalMorseView()
+        LearnInternationalMorseView(settings: MorseSettings())
     }
 }
 

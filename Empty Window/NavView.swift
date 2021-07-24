@@ -18,7 +18,7 @@ struct NavView: View{
             VStack{
                 Image("logo-vector")
                     .frame(maxWidth: .infinity, minHeight: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                NavigationLink(destination: MorseInputView(input: "")
+                NavigationLink(destination: MorseInputView(userInput: "")
                 ) {
                     Text("Convert To Morse").font(.system(size: 12))
                         .foregroundColor(.black).padding()
@@ -40,7 +40,7 @@ struct NavView: View{
                     )
                 }
                 NavigationLink(
-                    destination: LearnAmericanMorseView()){
+                    destination: LearnAmericanMorseView(settings: MorseSettings())){
                     Text("Learn American Morse").font(.system(size: 12))
                         .foregroundColor(.black).padding()
                     .overlay(
@@ -50,7 +50,7 @@ struct NavView: View{
 
                 }
                 NavigationLink(
-                    destination: LearnInternationalMorseView()){
+                    destination: LearnInternationalMorseView(settings: MorseSettings())){
                     Text("Learn International Morse").font(.system(size: 12))
                         .foregroundColor(.black).padding()
                     .overlay(

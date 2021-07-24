@@ -9,17 +9,20 @@ import SwiftUI
 
 struct MorseCodeGridView: View {
     
-    @Binding var runningMorse: Bool
-    @Binding var showCharacter: [Bool]
+    @ObservedObject
+    var gridState: MorseGridState
+    
+    @ObservedObject
+    var settings: MorseSettings
+    
     @Binding var userInput: String
-    @Binding var selectedStandard: StandardType
     @State var showingImage = false
     @State var pressed = false
     @State var characterPressed: Character = "a"
-
+    
     var body: some View{
         ZStack(alignment: .center){
-            let characters = MorseText(text: userInput, standardType: selectedStandard).getCharacters()
+            let characters = MorseText(text: userInput, standardType: settings.selectedStandard).getCharacters()
             let count = max(1, characters.count)
             ScrollView{
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(minimum: 25, maximum: 280), spacing: 40), count: 3), alignment: .leading, spacing: 10){
@@ -30,18 +33,31 @@ struct MorseCodeGridView: View {
                         }
                         else{
                             let character = characters[index]
-                            let width = character.getSymbolWidth() * 0.35
-                            let height = 25 * 0.35
+                            let width = character.getSymbolWidth() * 0.3
+                            let height = 25 * 0.3
                             Button(action: {
                                 
-//                                print("button pressed")
-//                                self.showImage()
+
                             }){
-                                characters[index].getImage()
-                                    .resizable()
-                                    .frame(width: CGFloat(width), height: CGFloat(height), alignment: .center)
-                                    .padding(.bottom, 10)
-                                    .padding(.trailing, 10)
+                                if gridState.isOn(index){
+                                    characters[index].getImage()
+                                        .resizable()
+                                        .renderingMode(.template)
+                                        .foregroundColor(.gray)
+                                        .frame(width: CGFloat(width), height: CGFloat(height), alignment: .center)
+                                        .padding(.bottom, 10)
+                                        .padding(.trailing, 10)
+                                }
+                                else{
+                                    
+                                    characters[index].getImage()
+                                        .resizable()
+                                        .foregroundColor(.gray)
+                                        .frame(width: CGFloat(width), height: CGFloat(height), alignment: .center)
+                                        .padding(.bottom, 10)
+                                        .padding(.trailing, 10)
+                                }
+
                             }
                             .onLongPressGesture(minimumDuration: 2.5, maximumDistance: .infinity, pressing: {pressing in
                                 withAnimation(.linear(duration: 0.25)){
@@ -55,6 +71,7 @@ struct MorseCodeGridView: View {
                                     print("long press ends")
                                 }
                             }, perform: {})
+                            .disabled(gridState.isRunning())
                         }
                     }
                 }
@@ -68,7 +85,24 @@ struct MorseCodeGridView: View {
                     .background(Color.white)
                     .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             }
+            else if gridState.getChar() != nil{
+                Image("alphabet-vector/"+String(gridState.getChar()!))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .background(Color.white)
+                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+            }
         }
+    }
+    
+    private func getColor(index: Int) -> Color{
+        if gridState.isOn(index){
+            print("GRAY")
+            return .gray
+        }
+       
+        return .black
     }
     
     private func showImage(){
@@ -81,6 +115,6 @@ struct MorseCodeGridView: View {
 
 struct MorseCodeGridView_Previews: PreviewProvider {
     static var previews: some View {
-        MorseCodeGridView(runningMorse: .constant(false), showCharacter: .constant([false]), userInput: .constant("a"), selectedStandard: .constant(.AmericanMorse))
+        MorseCodeGridView(gridState: MorseGridState(), settings: MorseSettings(), userInput: .constant("a"))
     }
 }
